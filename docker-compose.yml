@@ -1,0 +1,24 @@
+version: '3.3'
+services:
+  db:
+    image: mysql:5.7
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      # MYSQL_DATABASE: djdocker
+      # MYSQL_USER: root
+      # MYSQL_PASSWORD: root
+    ports:
+      - 13306:3306
+    volumes:
+      - myvolume:/var/lib/mysql
+  app:
+    build: .
+    volumes:
+      - .:/app
+    ports:
+      - 9000:80
+    depends_on:
+      - db
+
+volumes:
+  myvolume:
